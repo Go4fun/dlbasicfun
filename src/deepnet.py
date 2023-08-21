@@ -40,3 +40,15 @@ class TwoLayerNet:
     # 预测
     def predict(self, x):
         pass
+
+def main():
+    net = TwoLayerNet()
+    x = np.array([
+        [1, 2, 0],
+        [-1, 3.8, 2.6]
+        ])
+    net.predict(x)
+    pass
+
+if __name__ ==  '__main__':
+    main()
