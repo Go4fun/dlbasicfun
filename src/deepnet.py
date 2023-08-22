@@ -1,9 +1,11 @@
 # coding: utf-8
 import sys, os
 # sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
 from common.functions import *
+import ch05.two_layer_net as ch05dl
 
-class TwoLayerNet:
+class BasilTwoLayerNet:
     def __init__(self):
         self.layers = []
         pass
@@ -42,13 +44,17 @@ class TwoLayerNet:
         pass
 
 def main():
-    net = TwoLayerNet()
     x = np.array([
-        [1, 2, 0],
-        [-1, 3.8, 2.6]
-        ])
-    net.predict(x)
-    pass
+        [3,12],
+        [4,8],
+        [0.1, -0.3]
+    ])
+    y = softmax(x)
+    print(y)
+    print('~~~~~~~~~~~~~~~~~true nn starts now~~~~~~~~~~~~~~~~')
+    net = ch05dl.TwoLayerNet(2, 5, 3, weight_init_std=0.01)
+    y = net.predict(x)
+    print(y)
 
 if __name__ ==  '__main__':
     main()
