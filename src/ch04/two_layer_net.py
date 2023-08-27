@@ -58,17 +58,23 @@ class TwoLayerNet:
         grads = {}
         
         batch_num = x.shape[0]
+        print('batch_num=', batch_num)
         
         # forward
         a1 = np.dot(x, W1) + b1
         z1 = sigmoid(a1)
         a2 = np.dot(z1, W2) + b2
         y = softmax(a2)
+        print('y=', y)
+        print('yyy')
         
         # backward
         dy = (y - t) / batch_num
+        print('dy=', dy)
+        print('dydydy')
         grads['W2'] = np.dot(z1.T, dy)
         grads['b2'] = np.sum(dy, axis=0)
+        print('b2=', grads['b2'])
         
         da1 = np.dot(dy, W2.T)
         dz1 = sigmoid_grad(a1) * da1
@@ -79,11 +85,23 @@ class TwoLayerNet:
 
 if __name__ == '__main__':
     print('main start in main')
-    net = TwoLayerNet(input_size=6, hidden_size=3, output_size=2)
-    print(net.params['W1'])
-    print('~~~~~~~~~~')
-    print(net.params['W2'])
-    print('~~~~~~~~~~')
+    net = TwoLayerNet(input_size=2, hidden_size=2, output_size=2)
+    grads = net.gradient(np.array([[1.0, 0.5], [0.2, 0.1], [0.1, 0.2]]), np.array([[0, 1], [1, 0], [1, 1]]))
+    print('~~~~~~~grads=')
+    print(grads)
+    #print(net.params['W1'])
+    #print('~~~~~~~~~~')
+    #print(net.params['W2'])
+    '''print('b1~~~~~~~~~~')
     print(net.params['b1'])
-    print('~~~~~~~~~~')
+    print('b1~~~~~~~~~~')
+    print('b2~~~~~~~~~~')
     print(net.params['b2'])
+    print('b2~~~~~~~~~~')
+    '''
+    dz1 = np.array([
+        [1,2],
+        [0.1, 0.3]
+    ])
+    ss = np.sum(dz1, axis=1)
+    print('ss=', ss)
